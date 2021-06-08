@@ -1,0 +1,64 @@
+# Configuration for 'repo_helper' (https://github.com/domdfcoding/repo_helper)
+---
+modname: 'whey-conda'
+copyright_years: '2020-2021'
+author: 'Dominic Davis-Foster'
+email: 'dominic@davis-foster.co.uk'
+username: 'repo-helper'
+assignee: 'domdfcoding'
+primary_conda_channel: "domdfcoding"
+version: '0.0.0'
+license: 'MIT'
+short_desc: 'Whey extension for creating Conda packages for Python projects.'
+
+python_deploy_version: 3.6
+#min_coverage: 90
+#docs_fail_on_warning: true
+sphinx_html_theme: furo
+tox_testenv_extras: readme
+use_whey: true
+
+conda_channels:
+ - conda-forge
+
+# Versions to run tests for
+python_versions:
+ - '3.6'
+ - '3.7'
+ - '3.8'
+ - '3.9'
+ - 3.10-dev
+ - pypy36
+ - pypy37
+
+#sphinx_conf_epilogue:
+# - nitpicky = True
+
+extra_sphinx_extensions:
+ - configconfig.autoconfig
+ - sphinx_toolbox_experimental.html_section
+ - sphinx_toolbox_experimental.autosummary_widths
+ - sphinx_toolbox_experimental.needspace
+ - sphinx_toolbox_experimental.peps
+
+classifiers:
+ - 'Development Status :: 3 - Alpha'
+ - 'Environment :: Console'
+ - 'Intended Audience :: Developers'
+ - 'Topic :: Software Development :: Libraries :: Python Modules'
+ - "Topic :: Software Development :: Build Tools"
+ - "Topic :: System :: Archiving :: Packaging"
+
+keywords:
+ - pep621
+ - build
+ - conda
+ - packaging
+ - distribution
+
+entry_points:
+ whey.builder:
+  - "whey_conda = whey_conda:CondaBuilder"
+
+exclude_files:
+ - contributing
