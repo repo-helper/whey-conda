@@ -1,0 +1,46 @@
+stderr: '
+
+  '
+stdout: 'Copying .../spam_spam-stubs/__init__.pyi -> spam_spam-stubs/__init__.pyi
+
+  Writing spam_spam_stubs-2020.0.0.dist-info/entry_points.txt
+
+  Writing spam_spam_stubs-2020.0.0.dist-info/METADATA
+
+  Writing spam_spam_stubs-2020.0.0.dist-info/WHEEL
+
+  Writing spam_spam_stubs-2020.0.0.dist-info/top_level.txt
+
+  Writing spam_spam_stubs-2020.0.0.dist-info/RECORD
+
+  Wheel created at .../spam_spam_stubs-2020.0.0-py3-none-any.whl
+
+  Writing info/about.json
+
+  Writing info/index.json
+
+  Installing wheel into temporary directory
+
+  Looking in indexes: http://localhost:3141/root/staging
+
+  Processing .../spam_spam_stubs-2020.0.0-py3-none-any.whl
+
+  Installing collected packages: spam-spam-stubs
+
+  Successfully installed spam-spam-stubs-2020.0.0
+
+
+  Conda package created at .../spam_spam-stubs-2020.0.0-py_1.tar.bz2
+
+  '
+wheel_content:
+- info/about.json
+- info/files
+- info/index.json
+- site-packages/spam_spam-stubs/__init__.pyi
+- site-packages/spam_spam_stubs-2020.0.0.dist-info/INSTALLER
+- site-packages/spam_spam_stubs-2020.0.0.dist-info/METADATA
+- site-packages/spam_spam_stubs-2020.0.0.dist-info/RECORD
+- site-packages/spam_spam_stubs-2020.0.0.dist-info/WHEEL
+- site-packages/spam_spam_stubs-2020.0.0.dist-info/entry_points.txt
+- site-packages/spam_spam_stubs-2020.0.0.dist-info/top_level.txt

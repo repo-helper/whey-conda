@@ -1,0 +1,10 @@
+{
+  "license": null,
+  "summary": "Factory \u2e3b A code generator \ud83c\udfed",
+  "description": "Factory \u2e3b A code generator \ud83c\udfed\n\n\nBefore installing please ensure you have added the following channels: conda-forge\n",
+  "extra": {
+    "maintainers": [
+      "\u0141ukasz Langa"
+    ]
+  }
+}

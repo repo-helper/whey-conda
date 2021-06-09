@@ -1,0 +1,7 @@
+{
+  "home": "example.com",
+  "dev_url": "example.com",
+  "doc_url": "readthedocs.org",
+  "license": null,
+  "description": "\n\n\nBefore installing please ensure you have added the following channels: conda-forge\n"
+}

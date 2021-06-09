@@ -1,0 +1,12 @@
+{
+  "name": "spam",
+  "version": "2020.0.0",
+  "build": "py_1",
+  "build_number": 1,
+  "depends": [],
+  "arch": null,
+  "noarch": "python",
+  "platform": null,
+  "subdir": "noarch",
+  "timestamp": 1602552000000
+}

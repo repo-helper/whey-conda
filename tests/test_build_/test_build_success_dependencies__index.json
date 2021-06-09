@@ -1,0 +1,17 @@
+{
+  "name": "spam",
+  "version": "2020.0.0",
+  "build": "py_1",
+  "build_number": 1,
+  "depends": [
+    "django>2.1",
+    "django>2.0",
+    "gidgethub>4.0.0",
+    "httpx"
+  ],
+  "arch": null,
+  "noarch": "python",
+  "platform": null,
+  "subdir": "noarch",
+  "timestamp": 1602552000000
+}

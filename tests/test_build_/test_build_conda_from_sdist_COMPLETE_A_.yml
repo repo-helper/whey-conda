@@ -1,0 +1,52 @@
+stderr: '
+
+  '
+stdout: 'Copying .../sdist_unpacked/whey-2021.0.0/whey/__init__.py -> whey/__init__.py
+
+  Writing whey-2021.0.0.dist-info/LICENSE
+
+  Writing whey-2021.0.0.dist-info/entry_points.txt
+
+  Writing whey-2021.0.0.dist-info/METADATA
+
+  Writing whey-2021.0.0.dist-info/WHEEL
+
+  Writing whey-2021.0.0.dist-info/top_level.txt
+
+  Writing whey-2021.0.0.dist-info/RECORD
+
+  Wheel created at .../whey-2021.0.0-py3-none-any.whl
+
+  Writing info/license.txt
+
+  Writing info/about.json
+
+  Writing info/index.json
+
+  Installing wheel into temporary directory
+
+  Looking in indexes: http://localhost:3141/root/staging
+
+  Processing .../whey-2021.0.0-py3-none-any.whl
+
+  Installing collected packages: whey
+
+  Successfully installed whey-2021.0.0
+
+
+  Conda package created at .../whey-2021.0.0-py_1.tar.bz2
+
+  '
+wheel_content:
+- info/about.json
+- info/files
+- info/index.json
+- info/license.txt
+- site-packages/whey-2021.0.0.dist-info/INSTALLER
+- site-packages/whey-2021.0.0.dist-info/LICENSE
+- site-packages/whey-2021.0.0.dist-info/METADATA
+- site-packages/whey-2021.0.0.dist-info/RECORD
+- site-packages/whey-2021.0.0.dist-info/WHEEL
+- site-packages/whey-2021.0.0.dist-info/entry_points.txt
+- site-packages/whey-2021.0.0.dist-info/top_level.txt
+- site-packages/whey/__init__.py

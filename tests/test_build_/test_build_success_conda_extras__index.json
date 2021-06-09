@@ -1,0 +1,16 @@
+{
+  "name": "spam",
+  "version": "2020.0.0",
+  "build": "py_1",
+  "build_number": 1,
+  "depends": [
+    "matplotlib>=3.0.0",
+    "pytest<5.0.0",
+    "pytest-cov"
+  ],
+  "arch": null,
+  "noarch": "python",
+  "platform": null,
+  "subdir": "noarch",
+  "timestamp": 1602552000000
+}

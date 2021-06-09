@@ -136,6 +136,11 @@ Installation
 
 .. end installation
 
+Contents
+----------
+
+.. html-section::
+
 .. toctree::
 	:hidden:
 
@@ -143,16 +148,10 @@ Installation
 
 .. toctree::
 	:maxdepth: 3
-	:caption: API Reference
-	:glob:
+	:caption: Documentation
 
-	api/*
-
-.. toctree::
-	:maxdepth: 3
-	:caption: Contributing
-
-	contributing
+	configuration
+	api
 	Source
 
 .. sidebar-links::
@@ -160,6 +159,7 @@ Installation
 	:github:
 	:pypi: whey-conda
 
+	Contributing Guide <https://contributing.repo-helper.uk>
 
 .. start links
 
