@@ -40,7 +40,6 @@ wheel_content:
 - site-packages/spam-2020.0.0.dist-info/INSTALLER
 - site-packages/spam-2020.0.0.dist-info/METADATA
 - site-packages/spam-2020.0.0.dist-info/RECORD
-- site-packages/spam-2020.0.0.dist-info/REQUESTED
 - site-packages/spam-2020.0.0.dist-info/WHEEL
 - site-packages/spam-2020.0.0.dist-info/entry_points.txt
 - site-packages/spam-2020.0.0.dist-info/top_level.txt

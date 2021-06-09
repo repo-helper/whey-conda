@@ -1,11 +1,11 @@
 # stdlib
-import tarfile
+import re
 import tempfile
 
 # 3rd party
 import pytest
 from coincidence import min_version
-from coincidence.regressions import AdvancedDataRegressionFixture, check_file_regression
+from coincidence.regressions import AdvancedDataRegressionFixture
 from domdf_python_tools.paths import PathPlus
 from pyproject_examples.example_configs import (
 		AUTHORS,
@@ -21,7 +21,6 @@ from pyproject_examples.example_configs import (
 		UNICODE,
 		URLS
 		)
-from pytest_regressions.file_regression import FileRegressionFixture
 from whey import SDistBuilder
 from whey.config import load_toml
 
@@ -39,6 +38,7 @@ from tests.example_configs import (
 		MKRECIPE_EXTRAS,
 		MKRECIPE_EXTRAS_ALL
 		)
+from tests.utils import TarFile, TarFileRegressionFixture
 from whey_conda import CondaBuilder
 
 
@@ -80,7 +80,7 @@ def test_build_success(
 		config: str,
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
-		file_regression: FileRegressionFixture,
+		tar_regression: TarFileRegressionFixture,
 		capsys,
 		fixed_datetime,
 		):
@@ -103,20 +103,14 @@ def test_build_success(
 		wheel = conda_builder.build_conda()
 		assert (tmp_pathplus / wheel).is_file()
 
-		with tarfile.open(tmp_pathplus / wheel) as zip_file:
+		with TarFile.open(tmp_pathplus / wheel) as zip_file:
 			data["wheel_content"] = sorted(zip_file.getnames())
 
-			with zip_file.extractfile("site-packages/spam/__init__.py") as fp:
-				assert fp.read().decode("UTF-8") == "print('hello world)\n"
+			assert zip_file.read_text("site-packages/spam/__init__.py") == "print('hello world)\n"
 
-			with zip_file.extractfile("site-packages/spam-2020.0.0.dist-info/METADATA") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression)
-
-			with zip_file.extractfile("info/about.json") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression, extension="_about.json")
-
-			with zip_file.extractfile("info/index.json") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression, extension="_index.json")
+			tar_regression.check_archive(zip_file, "site-packages/spam-2020.0.0.dist-info/METADATA")
+			tar_regression.check_archive(zip_file, "info/about.json", extension="_about.json")
+			tar_regression.check_archive(zip_file, "info/index.json", extension="_index.json")
 
 			# assert "info/license.txt" in zip_file.getnames()
 			assert "info/files" in zip_file.getnames()
@@ -128,15 +122,13 @@ def test_build_success(
 	advanced_data_regression.check(data)
 
 
-def check_built_wheel(filename: PathPlus, file_regression: FileRegressionFixture):
+def check_built_wheel(filename: PathPlus, tar_regression: TarFileRegressionFixture):
 	assert filename.is_file()
 
-	with tarfile.open(filename) as zip_file:
+	with TarFile.open(filename) as zip_file:
+		assert zip_file.read_text("site-packages/whey/__init__.py") == "print('hello world)\n"
 
-		with zip_file.extractfile("site-packages/whey/__init__.py") as fp:
-			assert fp.read().decode("UTF-8") == "print('hello world)\n"
-		with zip_file.extractfile("site-packages/whey-2021.0.0.dist-info/METADATA") as fp:
-			check_file_regression(fp.read().decode("UTF-8"), file_regression)
+		tar_regression.check(zip_file.read_text("site-packages/whey-2021.0.0.dist-info/METADATA"))
 
 		contents = sorted(zip_file.getnames())
 
@@ -176,7 +168,7 @@ def test_build_complete(
 		config: str,
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
-		file_regression: FileRegressionFixture,
+		tar_regression: TarFileRegressionFixture,
 		capsys,
 		):
 	(tmp_pathplus / "pyproject.toml").write_clean(config)
@@ -199,7 +191,7 @@ def test_build_complete(
 				)
 
 		wheel = conda_builder.build_conda()
-		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, file_regression)
+		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, tar_regression)
 
 	outerr = capsys.readouterr()
 	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
@@ -211,7 +203,7 @@ def test_build_complete(
 def test_build_additional_files(
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
-		file_regression: FileRegressionFixture,
+		tar_regression: TarFileRegressionFixture,
 		capsys,
 		):
 
@@ -254,14 +246,12 @@ def test_build_additional_files(
 
 		wheel = conda_builder.build_conda()
 		assert (tmp_pathplus / wheel).is_file()
-		zip_file = tarfile.open(tmp_pathplus / wheel)
-		data["wheel_content"] = sorted(zip_file.getnames())
 
-		with zip_file.extractfile("site-packages/whey/__init__.py") as fp:
-			assert fp.read().decode("UTF-8") == "print('hello world)\n"
+		with TarFile.open(tmp_pathplus / wheel) as zip_file:
+			data["wheel_content"] = sorted(zip_file.getnames())
+			assert zip_file.read_text("site-packages/whey/__init__.py") == "print('hello world)\n"
 
-		with zip_file.extractfile("site-packages/whey-2021.0.0.dist-info/METADATA") as fp:
-			check_file_regression(fp.read().decode("UTF-8"), file_regression)
+			tar_regression.check_archive(zip_file, "site-packages/whey-2021.0.0.dist-info/METADATA")
 
 	outerr = capsys.readouterr()
 	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
@@ -273,7 +263,7 @@ def test_build_additional_files(
 def test_build_markdown_readme(
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
-		file_regression: FileRegressionFixture,
+		tar_regression: TarFileRegressionFixture,
 		capsys,
 		):
 
@@ -299,7 +289,7 @@ def test_build_markdown_readme(
 				)
 
 		wheel = conda_builder.build_conda()
-		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, file_regression)
+		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, tar_regression)
 
 	outerr = capsys.readouterr()
 	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
@@ -368,7 +358,7 @@ def test_build_conda_from_sdist(
 		config: str,
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
-		file_regression: FileRegressionFixture,
+		tar_regression: TarFileRegressionFixture,
 		capsys,
 		):
 	(tmp_pathplus / "pyproject.toml").write_clean(config)
@@ -399,7 +389,7 @@ def test_build_conda_from_sdist(
 
 	(tmp_pathplus / "sdist_unpacked").mkdir()
 
-	with tarfile.open(tmp_pathplus / sdist) as sdist_tar:
+	with TarFile.open(tmp_pathplus / sdist) as sdist_tar:
 		sdist_tar.extractall(path=tmp_pathplus / "sdist_unpacked")
 
 	capsys.readouterr()
@@ -415,7 +405,7 @@ def test_build_conda_from_sdist(
 				colour=False,
 				)
 		wheel = conda_builder.build_conda()
-		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, file_regression)
+		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, tar_regression)
 
 	outerr = capsys.readouterr()
 
@@ -496,7 +486,7 @@ def test_build_conda_from_sdist(
 def test_build_underscore_name(
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
-		file_regression: FileRegressionFixture,
+		tar_regression: TarFileRegressionFixture,
 		fixed_datetime,
 		capsys,
 		):
@@ -523,20 +513,14 @@ def test_build_underscore_name(
 		wheel = conda_builder.build_conda()
 		assert (tmp_pathplus / wheel).is_file()
 
-		with tarfile.open(tmp_pathplus / wheel) as zip_file:
+		with TarFile.open(tmp_pathplus / wheel) as zip_file:
 			data["wheel_content"] = sorted(zip_file.getnames())
 
-			with zip_file.extractfile("site-packages/spam_spam/__init__.py") as fp:
-				assert fp.read().decode("UTF-8") == "print('hello world)\n"
+			assert zip_file.read_text("site-packages/spam_spam/__init__.py") == "print('hello world)\n"
 
-			with zip_file.extractfile("site-packages/spam_spam-2020.0.0.dist-info/METADATA") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression)
-
-			with zip_file.extractfile("info/about.json") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression, extension="_about.json")
-
-			with zip_file.extractfile("info/index.json") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression, extension="_index.json")
+			tar_regression.check_archive(zip_file, "site-packages/spam_spam-2020.0.0.dist-info/METADATA")
+			tar_regression.check_archive(zip_file, "info/about.json", extension="_about.json")
+			tar_regression.check_archive(zip_file, "info/index.json", extension="_index.json")
 
 			# assert "info/license.txt" in zip_file.getnames()
 			assert "info/files" in zip_file.getnames()
@@ -551,7 +535,7 @@ def test_build_underscore_name(
 def test_build_stubs_name(
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
-		file_regression: FileRegressionFixture,
+		tar_regression: TarFileRegressionFixture,
 		capsys,
 		fixed_datetime,
 		):
@@ -578,20 +562,14 @@ def test_build_stubs_name(
 		wheel = conda_builder.build_conda()
 		assert (tmp_pathplus / wheel).is_file()
 
-		with tarfile.open(tmp_pathplus / wheel) as zip_file:
+		with TarFile.open(tmp_pathplus / wheel) as zip_file:
 			data["wheel_content"] = sorted(zip_file.getnames())
 
-			with zip_file.extractfile("site-packages/spam_spam-stubs/__init__.pyi") as fp:
-				assert fp.read().decode("UTF-8") == "print('hello world)\n"
+			assert zip_file.read_text("site-packages/spam_spam-stubs/__init__.pyi") == "print('hello world)\n"
 
-			with zip_file.extractfile("site-packages/spam_spam_stubs-2020.0.0.dist-info/METADATA") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression)
-
-			with zip_file.extractfile("info/about.json") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression, extension="_about.json")
-
-			with zip_file.extractfile("info/index.json") as fp:
-				check_file_regression(fp.read().decode("UTF-8"), file_regression, extension="_index.json")
+			tar_regression.check_archive(zip_file, "site-packages/spam_spam_stubs-2020.0.0.dist-info/METADATA")
+			tar_regression.check_archive(zip_file, "info/about.json", extension="_about.json")
+			tar_regression.check_archive(zip_file, "info/index.json", extension="_index.json")
 
 			# assert "info/license.txt" in zip_file.getnames()
 			assert "info/files" in zip_file.getnames()
