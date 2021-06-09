@@ -418,7 +418,11 @@ def test_build_conda_from_sdist(
 		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, file_regression)
 
 	outerr = capsys.readouterr()
-	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
+
+	stdout_lines = outerr.out.replace(tmp_pathplus.as_posix(), "...").splitlines()
+	stdout_lines = filter(re.compile("^(?!Looking in indexes: )").match, stdout_lines)
+
+	data["stdout"] = "\n".join(stdout_lines)
 	data["stderr"] = outerr.err
 
 	advanced_data_regression.check(data)
