@@ -61,11 +61,7 @@ All keys are optional.
 	.. code-block:: toml
 
 		[tool.whey-conda]
-		conda-channels = [
-			"domdfcoding",
-			"conda-forge",
-			"bioconda",
-		]
+		conda-channels = [ "domdfcoding", "conda-forge", "bioconda",]
 
 
 .. conf:: conda-extras

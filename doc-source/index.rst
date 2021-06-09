@@ -148,7 +148,6 @@ Contents
 
 .. toctree::
 	:maxdepth: 3
-	:caption: Documentation
 
 	configuration
 	api

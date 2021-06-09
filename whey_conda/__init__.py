@@ -74,6 +74,9 @@ class CondaBuilder(WheelBuilder):
 	:param out_dir: The output directory.
 	:default out_dir: :file:`{<project_dir>}/dist`
 	:param verbose: Enable verbose output.
+
+	.. autosummary-widths:: 1/2
+		:html: 45/100
 	"""
 
 	def __init__(
