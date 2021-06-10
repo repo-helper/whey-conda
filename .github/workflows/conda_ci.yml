@@ -41,7 +41,8 @@ jobs:
           # This mess is only necessary because conda won't fix it themselves
           # https://github.com/conda/conda/issues/1884
 
-          CURRENT_VERSION = ${${$(git tag | tail -n 1):1}:-0.0.0}
+          CURRENT_VERSION = $(git tag | tail -n 1 | cut -c 2-)
+          CURRENT_VERSION=${CURRENT_VERSION:=0.0.0}
           echo $CURRENT_VERSION
           python -m repo_helper build --conda --out-dir conda-bld/noarch
           $CONDA/bin/conda index ./conda-bld || exit 1
