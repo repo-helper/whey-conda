@@ -66,9 +66,10 @@ All keys are optional.
 
 .. conf:: conda-extras
 
-	**Type**: :toml:`Array` of :toml:`strings <String>`
+	**Type**: :toml:`Array` of :toml:`strings <String>` *or* the strings ``'all'`` or ``'none'``.
 
-	A list of extras (see :pep621:`option-dependencies`) to include as requirements in the Conda package.
+	A list of extras (see :pep621:`optional-dependencies`)
+	to include as requirements in the Conda package.
 
 	* The special keyword ``'all'`` indicates all extras should be included.
 	* The special keyword ``'none'`` indicates no extras should be included.

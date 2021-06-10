@@ -103,7 +103,7 @@ class WheyCondaParser(AbstractConfigParser):
 			config: Dict[str, TOML_TYPES],
 			) -> Union[Literal["all"], Literal["none"], List[str]]:
 		"""
-		Parse the ``conda-extras`` key, giving a list of extras (see :pep621:`option-dependencies`)
+		Parse the ``conda-extras`` key, giving a list of extras (see :pep621:`optional-dependencies`)
 		to include as requirements in the Conda package.
 
 		* The special keyword ``'all'`` indicates all extras should be included.
