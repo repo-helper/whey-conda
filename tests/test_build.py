@@ -1,6 +1,6 @@
 # stdlib
-import re
 import tempfile
+from typing import Any, Dict
 
 # 3rd party
 import pytest
@@ -88,7 +88,7 @@ def test_build_success(
 	(tmp_pathplus / "spam").mkdir()
 	(tmp_pathplus / "spam" / "__init__.py").write_clean("print('hello world)")
 
-	data = {}
+	data: Dict[str, Any] = {}
 
 	with tempfile.TemporaryDirectory() as tmpdir:
 		conda_builder = CondaBuilder(
@@ -176,7 +176,7 @@ def test_build_complete(
 	(tmp_pathplus / "LICENSE").write_clean("This is the license")
 	(tmp_pathplus / "requirements.txt").write_clean("domdf_python_tools")
 
-	data = {}
+	data: Dict[str, Any] = {}
 
 	with tempfile.TemporaryDirectory() as tmpdir:
 		conda_builder = CondaBuilder(
@@ -228,7 +228,7 @@ def test_build_additional_files(
 	(tmp_pathplus / "LICENSE").write_clean("This is the license")
 	(tmp_pathplus / "requirements.txt").write_clean("domdf_python_tools")
 
-	data = {}
+	data: Dict[str, Any] = {}
 
 	with tempfile.TemporaryDirectory() as tmpdir:
 		conda_builder = CondaBuilder(
@@ -270,7 +270,7 @@ def test_build_markdown_readme(
 	(tmp_pathplus / "LICENSE").write_clean("This is the license")
 	(tmp_pathplus / "requirements.txt").write_clean("domdf_python_tools")
 
-	data = {}
+	data: Dict[str, Any] = {}
 
 	with tempfile.TemporaryDirectory() as tmpdir:
 		conda_builder = CondaBuilder(
@@ -385,7 +385,7 @@ def test_build_conda_from_sdist(
 		sdist_tar.extractall(path=tmp_pathplus / "sdist_unpacked")
 
 	capsys.readouterr()
-	data = {}
+	data: Dict[str, Any] = {}
 
 	with tempfile.TemporaryDirectory() as tmpdir:
 		conda_builder = CondaBuilder(
@@ -484,7 +484,7 @@ def test_build_underscore_name(
 	(tmp_pathplus / "spam_spam").mkdir()
 	(tmp_pathplus / "spam_spam" / "__init__.py").write_clean("print('hello world)")
 
-	data = {}
+	data: Dict[str, Any] = {}
 
 	with tempfile.TemporaryDirectory() as tmpdir:
 		conda_builder = CondaBuilder(
@@ -531,7 +531,7 @@ def test_build_stubs_name(
 	(tmp_pathplus / "spam_spam-stubs").mkdir()
 	(tmp_pathplus / "spam_spam-stubs" / "__init__.pyi").write_clean("print('hello world)")
 
-	data = {}
+	data: Dict[str, Any] = {}
 
 	with tempfile.TemporaryDirectory() as tmpdir:
 		conda_builder = CondaBuilder(

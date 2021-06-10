@@ -36,7 +36,7 @@ import tempfile
 from itertools import chain
 from subprocess import PIPE, Popen
 from textwrap import dedent, indent
-from typing import Any, List, Mapping, Optional
+from typing import Any, List, Mapping, Optional, Union
 
 # 3rd party
 import click
@@ -323,7 +323,7 @@ class CondaBuilder(WheelBuilder):
 		Returns a list of the project's runtime requirements.
 		"""
 
-		extras = []
+		extras: List[Union[ComparableRequirement, str]] = []
 
 		if self.config["conda-extras"] == "all":
 			extras.extend(chain.from_iterable(self.config["optional-dependencies"].values()))
