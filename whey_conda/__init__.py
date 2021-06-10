@@ -372,7 +372,7 @@ class CondaBuilder(WheelBuilder):
 			pip_install_wheel(self.out_dir / wheel_file, tmpdir, self.verbose)
 			conda_filename = self.create_conda_archive(str(tmpdir), build_number=build_number)
 
-		self._echo(Fore.GREEN(f"Conda package created at {(self.out_dir / conda_filename).resolve()}"))
+		self._echo(Fore.GREEN(f"Conda package created at {(self.out_dir / conda_filename).resolve().as_posix()}"))
 		return conda_filename
 
 	build = build_conda
