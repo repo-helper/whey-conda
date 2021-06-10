@@ -18,5 +18,5 @@ def tar_regression(datadir, original_datadir, request) -> AdvancedFileRegression
 
 @pytest.fixture()
 def fixed_datetime(monkeypatch):
-	with with_fixed_datetime(datetime.datetime(2020, 10, 13, 1, 20, tzinfo=datetime.timezone.utc)):
+	with with_fixed_datetime(datetime.datetime.fromtimestamp(1602552000.0)):
 		yield
