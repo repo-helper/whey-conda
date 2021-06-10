@@ -26,8 +26,6 @@ jobs:
             - {repo: "sphinx-toolbox/sphinx-highlights", name: "sphinx-highlights", version: "0.4.0"}
             - {repo: "sphinx-toolbox/sphinx-toolbox", name: "sphinx-toolbox", version: "2.12.0"}
             - {repo: "sphinx-toolbox/toctree_plus", name: "toctree_plus", version: "0.4.0"}
-            - {repo: "repo-helper/formate", name: "formate", version: "0.4.5"}
-            - {repo: "repo-helper/formate-black", name: "formate-black", version: "0.1.0"}
             - {repo: "repo-helper/mkrecipe", name: "mkrecipe", version: "0.3.0"}
             - {repo: "repo-helper/whey", name: "whey", version: "0.0.14"}
             - {repo: "domdfcoding/consolekit", name: "consolekit", version: "1.2.2 "}
@@ -58,6 +56,7 @@ jobs:
       - name: "Build ${{ matrix.config.name }}"
         run: |
           git clone https://github.com/${{ matrix.config.repo }} ${{ matrix.config.name }}
+          git -C $(pwd)/${{ matrix.config.name }} checkout v${{ matrix.config.version }}
           python3 tests/make_package.py ${{ matrix.config.name }}
 
           $CONDA/bin/conda index ./${{ matrix.config.name }}/conda-bld || exit 1
