@@ -18,8 +18,17 @@ jobs:
         fail-fast: False
         matrix:
           config:
+            - {repo: "sphinx-toolbox/default_values", name: "default_values", version: "0.4.3"}
+            - {repo: "sphinx-toolbox/dict2css", name: "dict2css", version: "0.2.3"}
+            - {repo: "sphinx-toolbox/extras_require", name: "extras_require", version: "0.3.0"}
+            - {repo: "sphinx-toolbox/seed_intersphinx_mapping", name: "seed_intersphinx_mapping", version: "0.5.0"}
+            - {repo: "sphinx-toolbox/sphinx-debuginfo", name: "sphinx-debuginfo", version: "0.2.1"}
+            - {repo: "sphinx-toolbox/sphinx-highlights", name: "sphinx-highlights", version: "0.4.0"}
             - {repo: "sphinx-toolbox/sphinx-toolbox", name: "sphinx-toolbox", version: "2.12.0"}
-            - {repo: "sphinx-toolbox/default-values", name: "default_values", version: "0.4.3"}
+            - {repo: "sphinx-toolbox/toctree_plus", name: "toctree_plus", version: "0.4.0"}
+            - {repo: "repo-helper/formate", name: "formate", version: "0.4.5"}
+            - {repo: "repo-helper/formate-black", name: "formate-black", version: "0.1.0"}
+            - {repo: "repo-helper/mkrecipe", name: "mkrecipe", version: "0.3.0"}
             - {repo: "repo-helper/whey", name: "whey", version: "0.0.14"}
             - {repo: "domdfcoding/consolekit", name: "consolekit", version: "1.2.2 "}
             - {repo: "domdfcoding/mathematical", name: "mathematical", version: "0.5.0"}
