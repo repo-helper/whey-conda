@@ -56,7 +56,7 @@ def get_stdouterr(capsys, tmpdir: pathlib.Path) -> Dict[str, str]:
 	outerr = capsys.readouterr()
 
 	stdout_lines = outerr.out.replace(tmpdir.as_posix(), "...").splitlines()
-	stdout_lines = filter(re.compile("^(?!Looking in indexes: )").match, stdout_lines)
+	stdout_lines = filter(re.compile("^(?!Looking in indexes: |Processing )").match, stdout_lines)
 
 	return {
 			"stdout": '\n'.join(stdout_lines),

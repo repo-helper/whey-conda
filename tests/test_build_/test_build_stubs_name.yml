@@ -21,8 +21,6 @@ stdout: 'Copying .../spam_spam-stubs/__init__.pyi -> spam_spam-stubs/__init__.py
 
   Installing wheel into temporary directory
 
-  Processing .../spam_spam_stubs-2020.0.0-py3-none-any.whl
-
   Installing collected packages: spam-spam-stubs
 
   Successfully installed spam-spam-stubs-2020.0.0

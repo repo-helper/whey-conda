@@ -41,8 +41,6 @@ stdout: 'Copying .../whey/__init__.py -> whey/__init__.py
 
   Installing wheel into temporary directory
 
-  Processing .../whey-2021.0.0-py3-none-any.whl
-
   Installing collected packages: whey
 
   Successfully installed whey-2021.0.0
