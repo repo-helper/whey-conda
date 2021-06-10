@@ -48,6 +48,6 @@ jobs:
           python3 tests/make_package.py ${{ matrix.config.name }}
 
           $CONDA/bin/conda index ./${{ matrix.config.name }}/conda-bld || exit 1
-          $CONDA/bin/conda install -c file://$(pwd)/${{ matrix.config.name }} /conda-bld ${{ matrix.config.name }}=${{ matrix.config.version }} -y || exit 1
+          $CONDA/bin/conda install -c file://$(pwd)/${{ matrix.config.name }}/conda-bld ${{ matrix.config.name }}=${{ matrix.config.version }} -y || exit 1
           $CONDA/bin/pip install -r ${{ matrix.config.name }}/tests/requirements.txt || exit 1
           $CONDA/bin/pytest ${{ matrix.config.name }}/tests || exit 1
