@@ -14,6 +14,12 @@ jobs:
     name: "Conda"
     runs-on: ubuntu-latest
 
+    strategy:
+        fail-fast: False
+        matrix:
+          config:
+            - {repo: "sphinx-toolbox/sphinx-toolbox", name: "sphinx-toolbox", version: "2.12.0"}
+
     steps:
       - name: Checkout 🛎️
         uses: "actions/checkout@v2"
@@ -36,16 +42,12 @@ jobs:
           $CONDA/bin/conda config --add channels conda-forge
           $CONDA/bin/conda config --add channels domdfcoding
 
-      - name: Build sphinx-toolbox
+      - name: "Build ${{ matrix.config.name }}"
         run: |
-          git clone https://github.com/sphinx-toolbox/sphinx-toolbox
-          STDOUT=$(python3 tests/make_package.py sphinx-toolbox)
-          printf "$STDOUT\n"
-          FILENAME=$(printf "$STDOUT" | tail -n 1)
-          echo $FILENAME
+          git clone https://github.com/${{ matrix.config.repo }} ${{ matrix.config.name }}
+          python3 tests/make_package.py ${{ matrix.config.name }}
 
-          $CONDA/bin/conda index ./sphinx-toolbox/conda-bld || exit 1
-          $CONDA/bin/conda install -c file://$(pwd)/sphinx-toolbox/conda-bld sphinx-toolbox=2.12.0 -y || exit 1
-          $CONDA/bin/python -c "import sphinx_toolbox" || exit 1
-          $CONDA/bin/pip install -r sphinx-toolbox/tests/requirements.txt || exit 1
-          $CONDA/bin/pytest sphinx-toolbox/tests || exit 1
+          $CONDA/bin/conda index ./${{ matrix.config.name }}/conda-bld || exit 1
+          $CONDA/bin/conda install -c file://$(pwd)/${{ matrix.config.name }} /conda-bld ${{ matrix.config.name }}=${{ matrix.config.version }} -y || exit 1
+          $CONDA/bin/pip install -r ${{ matrix.config.name }}/tests/requirements.txt || exit 1
+          $CONDA/bin/pytest ${{ matrix.config.name }}/tests || exit 1
