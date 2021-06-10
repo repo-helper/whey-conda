@@ -8,7 +8,6 @@ import southwark
 from apeye import URL
 from domdf_python_tools.paths import PathPlus, in_directory
 from dulwich.config import StackedConfig
-from dulwich.porcelain import clone
 from whey import Foreman
 
 # this package
@@ -60,7 +59,7 @@ def test_build(username, repository, tmp_pathplus, monkeypatch):
 	print("==============================================")
 	print(f"Cloning {url!s} -> {target_dir!s}")
 
-	clone(str(url), str(target_dir), depth=1)
+	southwark.clone(str(url), str(target_dir), depth=1)
 
 	with in_directory(target_dir):
 		foreman = Foreman(target_dir)
