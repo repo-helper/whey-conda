@@ -38,7 +38,7 @@ from tests.example_configs import (
 		MKRECIPE_EXTRAS,
 		MKRECIPE_EXTRAS_ALL
 		)
-from tests.utils import TarFile, TarFileRegressionFixture
+from tests.utils import TarFile, TarFileRegressionFixture, get_stdouterr
 from whey_conda import CondaBuilder
 
 
@@ -115,9 +115,7 @@ def test_build_success(
 			# assert "info/license.txt" in zip_file.getnames()
 			assert "info/files" in zip_file.getnames()
 
-	outerr = capsys.readouterr()
-	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
-	data["stderr"] = outerr.err
+	data.update(get_stdouterr(capsys, tmp_pathplus))
 
 	advanced_data_regression.check(data)
 
@@ -193,9 +191,7 @@ def test_build_complete(
 		wheel = conda_builder.build_conda()
 		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, tar_regression)
 
-	outerr = capsys.readouterr()
-	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
-	data["stderr"] = outerr.err
+	data.update(get_stdouterr(capsys, tmp_pathplus))
 
 	advanced_data_regression.check(data)
 
@@ -253,9 +249,7 @@ def test_build_additional_files(
 
 			tar_regression.check_archive(zip_file, "site-packages/whey-2021.0.0.dist-info/METADATA")
 
-	outerr = capsys.readouterr()
-	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
-	data["stderr"] = outerr.err
+	data.update(get_stdouterr(capsys, tmp_pathplus))
 
 	advanced_data_regression.check(data)
 
@@ -291,9 +285,7 @@ def test_build_markdown_readme(
 		wheel = conda_builder.build_conda()
 		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, tar_regression)
 
-	outerr = capsys.readouterr()
-	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
-	data["stderr"] = outerr.err
+	data.update(get_stdouterr(capsys, tmp_pathplus))
 
 	advanced_data_regression.check(data)
 
@@ -407,13 +399,7 @@ def test_build_conda_from_sdist(
 		wheel = conda_builder.build_conda()
 		data["wheel_content"] = check_built_wheel(tmp_pathplus / wheel, tar_regression)
 
-	outerr = capsys.readouterr()
-
-	stdout_lines = outerr.out.replace(tmp_pathplus.as_posix(), "...").splitlines()
-	stdout_lines = filter(re.compile("^(?!Looking in indexes: )").match, stdout_lines)
-
-	data["stdout"] = "\n".join(stdout_lines)
-	data["stderr"] = outerr.err
+	data.update(get_stdouterr(capsys, tmp_pathplus))
 
 	advanced_data_regression.check(data)
 
@@ -525,9 +511,7 @@ def test_build_underscore_name(
 			# assert "info/license.txt" in zip_file.getnames()
 			assert "info/files" in zip_file.getnames()
 
-	outerr = capsys.readouterr()
-	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
-	data["stderr"] = outerr.err
+	data.update(get_stdouterr(capsys, tmp_pathplus))
 
 	advanced_data_regression.check(data)
 
@@ -574,9 +558,7 @@ def test_build_stubs_name(
 			# assert "info/license.txt" in zip_file.getnames()
 			assert "info/files" in zip_file.getnames()
 
-	outerr = capsys.readouterr()
-	data["stdout"] = outerr.out.replace(tmp_pathplus.as_posix(), "...")
-	data["stderr"] = outerr.err
+	data.update(get_stdouterr(capsys, tmp_pathplus))
 
 	advanced_data_regression.check(data)
 

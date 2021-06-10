@@ -1,6 +1,8 @@
 # stdlib
+import pathlib
+import re
 import tarfile
-from typing import IO, TYPE_CHECKING, Type, TypeVar, Union
+from typing import IO, TYPE_CHECKING, Dict, Type, TypeVar, Union
 
 # 3rd party
 from coincidence.regressions import AdvancedFileRegressionFixture
@@ -47,3 +49,16 @@ class TarFileRegressionFixture(AdvancedFileRegressionFixture):
 
 	def check_archive(self, tar_file: TarFile, filename: str, **kwargs):
 		self.check(tar_file.read_text(filename), **kwargs)
+
+
+def get_stdouterr(capsys, tmpdir: pathlib.Path) -> Dict[str, str]:
+
+	outerr = capsys.readouterr()
+
+	stdout_lines = outerr.out.replace(tmpdir.as_posix(), "...").splitlines()
+	stdout_lines = filter(re.compile("^(?!Looking in indexes: )").match, stdout_lines)
+
+	return {
+			"stdout": '\n'.join(stdout_lines),
+			"stderr": outerr.err,
+			}
