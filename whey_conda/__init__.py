@@ -259,7 +259,7 @@ class CondaBuilder(WheelBuilder):
 			for file in (wheel_contents_dir / pkg_dir).rglob('*'):
 				if file.is_file():
 					filename = (site_packages / file.relative_to(wheel_contents_dir)).as_posix()
-					files_entries.append(f"{filename}\n")
+					files_entries.append(str(filename))
 					conda_archive.add(str(file), arcname=filename)
 
 			dist_info_dir = wheel_contents_dir / f"{self.archive_name}.dist-info"
@@ -291,7 +291,7 @@ class CondaBuilder(WheelBuilder):
 
 				if file.is_file():
 					filename = (site_packages / file.relative_to(wheel_contents_dir)).as_posix()
-					files_entries.append(f"{filename}\n")
+					files_entries.append(str(filename))
 					conda_archive.add(str(file), arcname=filename)
 
 			(self.info_dir / "files").write_lines(files_entries)
