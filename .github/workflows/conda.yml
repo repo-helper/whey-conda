@@ -1,6 +1,6 @@
 # This file is managed by 'repo_helper'. Don't edit it directly.
 ---
-name: Conda Tests
+name: Conda Third Party Tests
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
-          python -m pip install --upgrade repo_helper
+          python -m pip install .
           # $CONDA is an environment variable pointing to the root of the miniconda directory
           $CONDA/bin/conda update -q conda
           $CONDA/bin/conda install conda-build=3.21.0
@@ -36,11 +36,16 @@ jobs:
           $CONDA/bin/conda config --add channels conda-forge
           $CONDA/bin/conda config --add channels domdfcoding
 
-      - name: "Build and install package"
+      - name: Build sphinx-toolbox
         run: |
-          # This mess is only necessary because conda won't fix it themselves
-          # https://github.com/conda/conda/issues/1884
+          git clone https://github.com/sphinx-toolbox/sphinx-toolbox
+          STDOUT=$(python3 tests/make_package.py sphinx-toolbox)
+          printf "$STDOUT\n"
+          FILENAME=$(printf "$STDOUT" | tail -n 1)
+          echo $FILENAME
 
-          python -m repo_helper build --conda --out-dir conda-bld/noarch
-          $CONDA/bin/conda index ./conda-bld || exit 1
-          $CONDA/bin/conda install -c file://$(pwd)/conda-bld domdf_python_tools -y || exit 1
+          $CONDA/bin/conda index ./sphinx-toolbox/conda-bld || exit 1
+          $CONDA/bin/conda install -c file://$(pwd)/sphinx-toolbox/conda-bld sphinx-toolbox=2.12.0 -y || exit 1
+          $CONDA/bin/python -c "import sphinx_toolbox" || exit 1
+          $CONDA/bin/pip install -r sphinx-toolbox/tests/requirements.txt || exit 1
+          $CONDA/bin/pytest sphinx-toolbox/tests || exit 1
