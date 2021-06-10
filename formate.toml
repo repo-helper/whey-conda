@@ -40,7 +40,6 @@ known_third_party = [
     "dom_toml",
     "domdf_python_tools",
     "dulwich",
-    "first",
     "importlib_metadata",
     "mkrecipe",
     "pyproject_parser",
