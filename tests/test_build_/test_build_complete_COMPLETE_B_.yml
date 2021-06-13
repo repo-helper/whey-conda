@@ -21,6 +21,8 @@ stdout: 'Copying .../whey/__init__.py -> whey/__init__.py
 
   Writing info/about.json
 
+  Checking dependencies against the following channels: ''conda-forge''
+
   Writing info/index.json
 
   Installing wheel into temporary directory

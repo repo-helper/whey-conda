@@ -17,6 +17,8 @@ stdout: 'Copying .../spam/__init__.py -> spam/__init__.py
 
   Writing info/about.json
 
+  Checking dependencies against the following channels: ''conda-forge''
+
   Writing info/index.json
 
   Installing wheel into temporary directory

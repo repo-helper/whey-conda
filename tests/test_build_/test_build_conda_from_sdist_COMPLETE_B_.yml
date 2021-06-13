@@ -21,6 +21,8 @@ stdout: 'Copying .../sdist_unpacked/whey-2021.0.0/whey/__init__.py -> whey/__ini
 
   Writing info/about.json
 
+  Checking dependencies against the following channels: ''conda-forge''
+
   Writing info/index.json
 
   Installing wheel into temporary directory
