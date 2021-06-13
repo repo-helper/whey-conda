@@ -127,17 +127,52 @@ extras = "all"
 """
 
 CONDA_CHANNELS = f"""
-{OPTIONAL_DEPENDENCIES}
+{MINIMAL_CONFIG}
+dependencies = [
+  "domdf_python_tools",
+  "typing-extensions>=3.10.0.0",
+]
 
 [tool.whey-conda]
 conda-channels = ["conda-forge", "domdfcoding"]
 """
 
 MKRECIPE_CHANNELS = f"""
-{OPTIONAL_DEPENDENCIES}
+{MINIMAL_CONFIG}
+dependencies = [
+  "domdf_python_tools",
+  "typing-extensions>=3.10.0.0",
+]
 
 [tool.mkrecipe]
 conda-channels = ["conda-forge", "domdfcoding"]
+"""
+
+BOTH_CHANNELS = f"""
+{MINIMAL_CONFIG}
+dependencies = [
+  "domdf_python_tools",
+  "typing-extensions>=3.10.0.0",
+]
+
+[tool.mkrecipe]
+conda-channels = ["domdfcoding"]
+
+[tool.whey-conda]
+conda-channels = ["conda-forge", "domdfcoding"]
+"""
+
+BOTH_CHANNELS2 = f"""
+{MINIMAL_CONFIG}
+dependencies = [
+  "domdf_python_tools",
+  "typing-extensions>=3.10.0.0",
+]
+
+[tool.mkrecipe]
+conda-channels = ["conda-forge", "domdfcoding"]
+
+[tool.whey-conda]
 """
 
 DESCRIPTION = f"""

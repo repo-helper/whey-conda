@@ -26,6 +26,8 @@ from whey.config import load_toml
 
 # this package
 from tests.example_configs import (
+		BOTH_CHANNELS,
+		BOTH_CHANNELS2,
 		COMPLETE_A,
 		COMPLETE_B,
 		CONDA_CHANNELS,
@@ -71,6 +73,8 @@ from whey_conda import CondaBuilder
 				pytest.param(MKRECIPE_EXTRAS_ALL, id="mkrecipe-extras-all"),
 				pytest.param(CONDA_CHANNELS, id="conda-channels"),
 				pytest.param(MKRECIPE_CHANNELS, id="mkrecipe-channels"),
+				pytest.param(BOTH_CHANNELS, id="both-channels"),
+				pytest.param(BOTH_CHANNELS2, id="both-channels-2"),
 				pytest.param(URLS, id="urls"),
 				pytest.param(ENTRY_POINTS, id="entry_points"),
 				pytest.param(UNICODE, id="unicode"),
