@@ -147,3 +147,17 @@ To install with ``conda``:
 		$ conda install whey-conda
 
 .. end installation
+
+-----
+
+To enable ``whey-conda``, add the following lines to your ``pyproject.toml`` file:
+
+.. code-block:: TOML
+
+	[tool.whey.builders]
+	binary = "whey_conda"
+
+The ``whey-conda``-specific configuration is defined in the ``tool.whey-conda`` table.
+See `the documentation`_ for more details.
+
+.. _the documentation: https://whey-pth.readthedocs.io/en/latest/
