@@ -6,4 +6,4 @@ mkrecipe>=0.3.0
 pyproject-parser>=0.2.3
 shippinglabel>=0.15.0
 typing-extensions>=3.10.0.0
-whey>=0.0.13
+whey>=0.0.15
