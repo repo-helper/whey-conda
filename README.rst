@@ -160,4 +160,4 @@ To enable ``whey-conda``, add the following lines to your ``pyproject.toml`` fil
 The ``whey-conda``-specific configuration is defined in the ``tool.whey-conda`` table.
 See `the documentation`_ for more details.
 
-.. _the documentation: https://whey-pth.readthedocs.io/en/latest/
+.. _the documentation: https://whey-conda.readthedocs.io/en/latest/
