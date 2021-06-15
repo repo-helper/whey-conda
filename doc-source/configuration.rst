@@ -20,8 +20,8 @@ The ``whey-conda``-specific configuration is defined in the ``tool.whey-conda`` 
 :conf:`conda-channels` and :conf:`conda-extras` can instead be defined in the `tool.mkrecipe`_
 table if you also use ``mkrecipe``.
 
-
 .. _tool.mkrecipe: https://mkrecipe.readthedocs.io/en/latest/configuration.html#tool-mkrecipe
+
 
 ``[tool.whey-conda]``
 ----------------------
