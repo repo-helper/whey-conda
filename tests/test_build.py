@@ -21,7 +21,7 @@ from pyproject_examples.example_configs import (
 		UNICODE,
 		URLS
 		)
-from whey import SDistBuilder
+from whey.builder import SDistBuilder
 from whey.config import load_toml
 
 # this package

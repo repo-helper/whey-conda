@@ -8,7 +8,7 @@ import southwark
 from apeye import URL
 from domdf_python_tools.paths import PathPlus, in_directory
 from dulwich.config import StackedConfig
-from whey import Foreman
+from whey.foreman import Foreman
 
 # this package
 from tests.example_configs import DESCRIPTION
