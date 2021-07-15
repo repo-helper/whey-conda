@@ -2,6 +2,7 @@ click>=7.1.2
 consolekit>=1.2.1
 dom-toml>=0.4.0
 domdf-python-tools>=2.9.1
+handy-archives>=0.1.0
 mkrecipe>=0.3.0
 pyproject-parser>=0.3.0
 shippinglabel>=0.15.0

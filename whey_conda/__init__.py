@@ -41,6 +41,7 @@ from typing import Any, List, Mapping, Optional, Union
 # 3rd party
 import click
 import dom_toml
+import handy_archives
 from consolekit.terminal_colours import Fore
 from consolekit.utils import abort
 from domdf_python_tools.paths import PathPlus
@@ -254,7 +255,7 @@ class CondaBuilder(WheelBuilder):
 
 		files_entries = []
 
-		with tarfile.open(conda_filename, mode="w:bz2") as conda_archive:
+		with handy_archives.TarFile.open(conda_filename, mode="w:bz2") as conda_archive:
 
 			pkg_dir = posixpath.join(self.config["source-dir"], self.config["package"].split('.')[0])
 			for file in (wheel_contents_dir / pkg_dir).rglob('*'):
