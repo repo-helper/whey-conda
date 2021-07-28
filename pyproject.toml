@@ -70,7 +70,6 @@ extensions = [
     "sphinxcontrib.default_values",
     "sphinxcontrib.toctree_plus",
     "sphinx_debuginfo",
-    "sphinx_licenseinfo",
     "seed_intersphinx_mapping",
     "configconfig.autoconfig",
     "sphinx_toolbox_experimental.html_section",
@@ -126,6 +125,13 @@ autodoc_exclude_members = [
     "__abstractmethods__",
     "__hash__",
 ]
+
+[tool.mypy]
+python_version = "3.6"
+namespace_packages = true
+check_untyped_defs = true
+warn_unused_ignores = true
+no_implicit_optional = true
 
 [project.entry-points."whey.builder"]
 whey_conda = "whey_conda:CondaBuilder"
