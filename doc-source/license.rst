@@ -7,4 +7,4 @@ License
 .. license-info:: MIT
 
 .. license::
-	:py: sphinx-licenseinfo
+	:py: whey-conda
