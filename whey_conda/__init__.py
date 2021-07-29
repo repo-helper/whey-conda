@@ -42,7 +42,7 @@ from typing import Any, List, Mapping, Optional, Union
 import click
 import dom_toml
 import handy_archives
-from consolekit.terminal_colours import Fore
+from consolekit.terminal_colours import ColourTrilean, Fore
 from consolekit.utils import abort
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.typing import PathLike
@@ -89,7 +89,7 @@ class CondaBuilder(WheelBuilder):
 			out_dir: Optional[PathLike] = None,
 			*,
 			verbose: bool = False,
-			colour: bool = None,
+			colour: ColourTrilean = None,
 			):
 		super().__init__(
 				project_dir,
