@@ -154,7 +154,7 @@ class CondaBuilder(WheelBuilder):
 		.. seealso:: https://docs.conda.io/projects/conda-build/en/latest/resources/package-spec.html#info-index-json
 
 		:param build_number:
-		"""  # noqa: D400
+		"""
 
 		build_string = f"py_{build_number}"
 		# https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-number-and-string

@@ -89,7 +89,7 @@ class WheyCondaParser(AbstractConfigParser):
 			]
 
 		:param config: The unparsed TOML config for the ``[tool.whey-conda]`` table.
-		"""  # noqa: D400
+		"""
 
 		channels = config["conda-channels"]
 
