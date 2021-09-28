@@ -36,11 +36,7 @@ def test_whey_conda_parser_valid_config(
 				pytest.param('[tool.whey-conda]\nconda-extras = "cli"', id="extras_cli"),
 				]
 		)
-def test_whey_conda_parser_invalid_extras(
-		toml_config: str,
-		tmp_pathplus: PathPlus,
-		advanced_data_regression: AdvancedDataRegressionFixture,
-		):
+def test_whey_conda_parser_invalid_extras(toml_config: str):
 
 	with pytest.raises(BadConfigError, match=r"Invalid value for \[tool.whey-conda.conda-extras\]: "):
 		WheyCondaParser().parse(dom_toml.loads(toml_config)["tool"]["whey-conda"])

@@ -17,6 +17,6 @@ def tar_regression(datadir, original_datadir, request) -> AdvancedFileRegression
 
 
 @pytest.fixture()
-def fixed_datetime(monkeypatch):
+def fixed_datetime():
 	with with_fixed_datetime(datetime.datetime.fromtimestamp(1602552000.0)):
 		yield

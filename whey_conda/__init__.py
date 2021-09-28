@@ -31,7 +31,6 @@ import datetime
 import os
 import pathlib
 import posixpath
-import tarfile
 import tempfile
 from itertools import chain
 from subprocess import PIPE, Popen

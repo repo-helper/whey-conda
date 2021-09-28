@@ -80,13 +80,13 @@ from whey_conda import CondaBuilder
 				pytest.param(UNICODE, id="unicode"),
 				]
 		)
+@pytest.mark.usefixtures("fixed_datetime")
 def test_build_success(
 		config: str,
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		tar_regression: TarFileRegressionFixture,
 		capsys,
-		fixed_datetime,
 		):
 	(tmp_pathplus / "pyproject.toml").write_clean(config)
 	(tmp_pathplus / "spam").mkdir()
@@ -473,11 +473,11 @@ def test_build_conda_from_sdist(
 # 			)
 
 
+@pytest.mark.usefixtures("fixed_datetime")
 def test_build_underscore_name(
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		tar_regression: TarFileRegressionFixture,
-		fixed_datetime,
 		capsys,
 		):
 	(tmp_pathplus / "pyproject.toml").write_lines([
@@ -520,12 +520,12 @@ def test_build_underscore_name(
 	advanced_data_regression.check(data)
 
 
+@pytest.mark.usefixtures("fixed_datetime")
 def test_build_stubs_name(
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		tar_regression: TarFileRegressionFixture,
 		capsys,
-		fixed_datetime,
 		):
 	(tmp_pathplus / "pyproject.toml").write_lines([
 			"[project]",
