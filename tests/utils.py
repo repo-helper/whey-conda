@@ -31,7 +31,7 @@ class TarFile(tarfile.TarFile):
 	if TYPE_CHECKING:
 
 		def __enter__(self: _TF) -> _TF:
-			return super().__enter__()  # type: ignore
+			return super().__enter__()
 
 		@classmethod  # noqa: A001  # pylint: disable=redefined-builtin
 		def open(
@@ -39,7 +39,7 @@ class TarFile(tarfile.TarFile):
 				*args,
 				**kwargs,
 				) -> _TF:
-			return super().open(  # type: ignore
+			return super().open(
 					*args,
 					**kwargs,
 					)

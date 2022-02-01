@@ -96,7 +96,7 @@ class CondaBuilder(WheelBuilder):
 				build_dir=build_dir,
 				out_dir=out_dir,
 				verbose=verbose,
-				colour=colour,
+				colour=colour,  # type: ignore
 				)
 
 		our_config = dom_toml.load(self.project_dir / "pyproject.toml")
