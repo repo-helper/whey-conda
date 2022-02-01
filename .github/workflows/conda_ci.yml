@@ -33,7 +33,6 @@ jobs:
           conda-build-version: 3.21.0
 
       - name: Install dependencies 🔧
-        shell: bash
         run: |
           python -VV
           python -m site
@@ -60,7 +59,5 @@ jobs:
       - name: "Run Tests"
         run: |
           rm -rf whey_conda
-          which -a pip
-          which -a python
           pip install -r tests/requirements.txt
           python -m pytest tests/
