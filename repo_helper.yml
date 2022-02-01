@@ -38,7 +38,6 @@ sphinx_conf_epilogue:
 
 extra_sphinx_extensions:
  - configconfig.autoconfig
- - sphinx_toolbox_experimental.html_section
  - sphinx_toolbox_experimental.autosummary_widths
  - sphinx_toolbox_experimental.needspace
  - sphinx_toolbox_experimental.peps
