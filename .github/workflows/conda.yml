@@ -70,4 +70,4 @@ jobs:
           $CONDA/bin/conda install -c file://$(pwd)/${{ matrix.config.name }}/conda-bld ${{ matrix.config.name }}=${{ matrix.config.version }} -y || exit 1
           $CONDA/bin/conda install pytest coincidence || exit 1
           pip install -r ${{ matrix.config.name }}/tests/requirements.txt || exit 1
-          python -m pytest ${{ matrix.config.name }}/tests || exit 1
+          pytest ${{ matrix.config.name }}/tests || exit 1
