@@ -13,6 +13,9 @@ jobs:
   tests:
     name: "Conda"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
 
     strategy:
         fail-fast: False
@@ -40,16 +43,20 @@ jobs:
         with:
           python-version: "3.8"
 
+      - name: Setup Conda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: env
+          conda-build-version: 3.21.0
+
       - name: Install dependencies 🔧
         run: |
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install .
-          # $CONDA is an environment variable pointing to the root of the miniconda directory
-          $CONDA/bin/conda update -q conda
-          $CONDA/bin/conda install conda-build=3.21.0
 
+          # $CONDA is an environment variable pointing to the root of the miniconda directory
           $CONDA/bin/conda config --add channels conda-forge
           $CONDA/bin/conda config --add channels domdfcoding
 
@@ -57,9 +64,9 @@ jobs:
         run: |
           git clone https://github.com/${{ matrix.config.repo }} ${{ matrix.config.name }}
           git -C $(pwd)/${{ matrix.config.name }} checkout v${{ matrix.config.version }}
-          python3 tests/make_package.py ${{ matrix.config.name }}
+          python -m whey --builder whey_conda --out-dir ${{ matrix.config.name }}/conda-bld/noarch
 
           $CONDA/bin/conda index ./${{ matrix.config.name }}/conda-bld || exit 1
           $CONDA/bin/conda install -c file://$(pwd)/${{ matrix.config.name }}/conda-bld ${{ matrix.config.name }}=${{ matrix.config.version }} -y || exit 1
-          $CONDA/bin/pip install -r ${{ matrix.config.name }}/tests/requirements.txt || exit 1
-          $CONDA/bin/pytest ${{ matrix.config.name }}/tests || exit 1
+          pip install -r ${{ matrix.config.name }}/tests/requirements.txt || exit 1
+          python -m pytest ${{ matrix.config.name }}/tests || exit 1
