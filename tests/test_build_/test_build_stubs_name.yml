@@ -9,8 +9,6 @@ stdout: 'Copying .../spam_spam-stubs/__init__.pyi -> spam_spam-stubs/__init__.py
 
   Writing spam_spam_stubs-2020.0.0.dist-info/WHEEL
 
-  Writing spam_spam_stubs-2020.0.0.dist-info/top_level.txt
-
   Writing spam_spam_stubs-2020.0.0.dist-info/RECORD
 
   Wheel created at .../spam_spam_stubs-2020.0.0-py3-none-any.whl
@@ -39,4 +37,3 @@ wheel_content:
 - site-packages/spam_spam_stubs-2020.0.0.dist-info/RECORD
 - site-packages/spam_spam_stubs-2020.0.0.dist-info/WHEEL
 - site-packages/spam_spam_stubs-2020.0.0.dist-info/entry_points.txt
-- site-packages/spam_spam_stubs-2020.0.0.dist-info/top_level.txt

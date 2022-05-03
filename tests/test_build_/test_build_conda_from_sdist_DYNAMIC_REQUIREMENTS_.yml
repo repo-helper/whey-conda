@@ -11,8 +11,6 @@ stdout: 'Copying .../sdist_unpacked/whey-2021.0.0/whey/__init__.py -> whey/__ini
 
   Writing whey-2021.0.0.dist-info/WHEEL
 
-  Writing whey-2021.0.0.dist-info/top_level.txt
-
   Writing whey-2021.0.0.dist-info/RECORD
 
   Wheel created at .../whey-2021.0.0-py3-none-any.whl
@@ -44,5 +42,4 @@ wheel_content:
 - site-packages/whey-2021.0.0.dist-info/RECORD
 - site-packages/whey-2021.0.0.dist-info/WHEEL
 - site-packages/whey-2021.0.0.dist-info/entry_points.txt
-- site-packages/whey-2021.0.0.dist-info/top_level.txt
 - site-packages/whey/__init__.py
