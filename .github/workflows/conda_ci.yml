@@ -12,7 +12,7 @@ permissions:
 jobs:
   tests:
     name: "Conda"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     defaults:
       run:
         shell: bash -l {0}
@@ -38,7 +38,8 @@ jobs:
           python -m site
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install --upgrade "whey-conda" "whey"
-
+          # $CONDA is an environment variable pointing to the root of the miniconda directory
+          $CONDA/bin/conda update -n base conda
           $CONDA/bin/conda config --add channels conda-forge
           $CONDA/bin/conda config --add channels domdfcoding
 
@@ -59,5 +60,6 @@ jobs:
       - name: "Run Tests"
         run: |
           rm -rf whey_conda
+          $CONDA/bin/conda install pytest coincidence || exit 1
           pip install -r tests/requirements.txt
-          python -m pytest tests/
+          pytest tests/
