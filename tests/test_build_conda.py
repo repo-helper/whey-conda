@@ -6,6 +6,7 @@ import dom_toml
 import pytest
 import southwark
 from apeye import URL
+from coincidence.selectors import min_version
 from domdf_python_tools.paths import PathPlus, in_directory
 from dulwich.config import StackedConfig
 from whey.foreman import Foreman
@@ -36,7 +37,7 @@ GITHUB_COM = URL("https://github.com")
 @pytest.mark.parametrize(
 		"username, repository",
 		[
-				("sphinx-toolbox", "sphinx-toolbox"),
+				pytest.param("sphinx-toolbox", "sphinx-toolbox", marks=min_version("3.7")),
 				("sphinx-toolbox", "default_values"),
 				("repo-helper", "whey"),
 				("domdfcoding", "consolekit"),
