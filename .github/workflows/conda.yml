@@ -21,18 +21,18 @@ jobs:
         fail-fast: False
         matrix:
           config:
-            - {repo: "sphinx-toolbox/default_values", name: "default_values", version: "0.5.0"}
-            - {repo: "sphinx-toolbox/dict2css", name: "dict2css", version: "0.2.4"}
-            - {repo: "sphinx-toolbox/extras_require", name: "extras_require", version: "0.4.0"}
-            - {repo: "sphinx-toolbox/seed_intersphinx_mapping", name: "seed_intersphinx_mapping", version: "1.0.0"}
-            - {repo: "sphinx-toolbox/sphinx-debuginfo", name: "sphinx-debuginfo", version: "0.2.1"}
-            - {repo: "sphinx-toolbox/sphinx-highlights", name: "sphinx-highlights", version: "0.5.0"}
-            - {repo: "sphinx-toolbox/sphinx-toolbox", name: "sphinx-toolbox", version: "2.16.1"}
-            - {repo: "sphinx-toolbox/toctree_plus", name: "toctree_plus", version: "0.5.0"}
-            - {repo: "repo-helper/mkrecipe", name: "mkrecipe", version: "0.4.0"}
-            - {repo: "repo-helper/whey", name: "whey", version: "0.0.17"}
-            - {repo: "domdfcoding/consolekit", name: "consolekit", version: "1.3.1"}
-            - {repo: "domdfcoding/mathematical", name: "mathematical", version: "0.5.0"}
+            - {repo: "sphinx-toolbox/default_values", name: "default_values", version: "0.5.1"}
+            - {repo: "sphinx-toolbox/dict2css", name: "dict2css", version: "0.3.0"}
+            - {repo: "sphinx-toolbox/extras_require", name: "extras_require", version: "0.4.3"}
+            - {repo: "sphinx-toolbox/seed_intersphinx_mapping", name: "seed_intersphinx_mapping", version: "1.0.1"}
+            - {repo: "sphinx-toolbox/sphinx-debuginfo", name: "sphinx-debuginfo", version: "0.2.2"}
+            - {repo: "sphinx-toolbox/sphinx-highlights", name: "sphinx-highlights", version: "0.5.1"}
+            - {repo: "sphinx-toolbox/sphinx-toolbox", name: "sphinx-toolbox", version: "3.0.0"}
+            - {repo: "sphinx-toolbox/toctree_plus", name: "toctree_plus", version: "0.6.0"}
+            - {repo: "repo-helper/mkrecipe", name: "mkrecipe", version: "0.5.0"}
+            - {repo: "repo-helper/whey", name: "whey", version: "0.0.23"}
+            - {repo: "domdfcoding/consolekit", name: "consolekit", version: "1.4.1"}
+            - {repo: "domdfcoding/mathematical", name: "mathematical", version: "0.5.1"}
 
     steps:
       - name: Checkout 🛎️
