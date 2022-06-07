@@ -49,8 +49,8 @@ from domdf_python_tools.words import word_join
 from mkrecipe.config import MkrecipeParser
 from pyproject_parser.classes import _NormalisedName
 from shippinglabel.checksum import get_record_entry
-from shippinglabel.conda import make_conda_description, prepare_requirements, validate_requirements
 from shippinglabel.requirements import ComparableRequirement
+from shippinglabel_conda import make_conda_description, prepare_requirements, validate_requirements
 from whey.builder import WheelBuilder
 
 # this package
