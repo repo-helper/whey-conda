@@ -4,7 +4,7 @@ build-backend = "whey"
 
 [project]
 name = "whey-conda"
-version = "0.1.2"
+version = "0.2.0"
 description = "Whey extension for creating Conda packages for Python projects."
 readme = "README.rst"
 keywords = [ "build", "conda", "distribution", "packaging", "pep621",]
