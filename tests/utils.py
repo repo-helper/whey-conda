@@ -47,11 +47,11 @@ class TarFile(tarfile.TarFile):
 
 class TarFileRegressionFixture(AdvancedFileRegressionFixture):
 
-	def check_archive(self, tar_file: TarFile, filename: str, **kwargs):
+	def check_archive(self, tar_file: TarFile, filename: str, **kwargs) -> None:
 		self.check(tar_file.read_text(filename), **kwargs)
 
 
-def get_stdouterr(capsys, tmpdir: pathlib.Path) -> Dict[str, str]:
+def get_stdouterr(capsys, tmpdir: pathlib.Path) -> Dict[str, str]:  # noqa: MAN001
 
 	outerr = capsys.readouterr()
 

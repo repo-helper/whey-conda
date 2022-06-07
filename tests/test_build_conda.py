@@ -16,7 +16,7 @@ from tests.example_configs import DESCRIPTION
 from whey_conda import CondaBuilder
 
 
-def test_info_dir(tmp_pathplus):
+def test_info_dir(tmp_pathplus: PathPlus) -> None:
 
 	(tmp_pathplus / "pyproject.toml").write_text(DESCRIPTION)
 
@@ -44,7 +44,7 @@ GITHUB_COM = URL("https://github.com")
 				("domdfcoding", "mathematical"),
 				]
 		)
-def test_build(username, repository, tmp_pathplus, monkeypatch):
+def test_build(username: str, repository: str, tmp_pathplus: PathPlus, monkeypatch):
 	# Monkeypatch dulwich so it doesn't try to use the global config.
 	monkeypatch.setattr(StackedConfig, "default_backends", lambda *args: [])
 	email = b"repo-helper[bot] <74742576+repo-helper[bot]@users.noreply.github.com>"

@@ -141,11 +141,11 @@ class CondaBuilder(WheelBuilder):
 		info_dir.maybe_make()
 		return info_dir
 
-	def _echo_if_v(self, *args, **kwargs):
+	def _echo_if_v(self, *args, **kwargs) -> None:
 		if self.verbose:
 			self._echo(*args, **kwargs)
 
-	def write_conda_index(self, build_number: int = 1):
+	def write_conda_index(self, build_number: int = 1) -> None:
 		"""
 		Write the conda ``index.json`` file.
 
@@ -178,7 +178,7 @@ class CondaBuilder(WheelBuilder):
 		index_json_file.dump_json(index, indent=2)
 		self.report_written(index_json_file)
 
-	def write_conda_about(self):
+	def write_conda_about(self) -> None:
 		"""
 		Write the conda ``about.json`` file.
 
@@ -304,7 +304,7 @@ class CondaBuilder(WheelBuilder):
 
 		return os.path.basename(conda_filename)
 
-	def write_license(self, dest_dir: PathPlus, dest_filename: str = "LICENSE"):
+	def write_license(self, dest_dir: PathPlus, dest_filename: str = "LICENSE") -> None:
 		"""
 		Write the ``LICENSE`` file.
 
@@ -384,7 +384,7 @@ class CondaBuilder(WheelBuilder):
 	build = build_conda
 
 
-def pip_install_wheel(wheel_file: PathLike, target_dir: PathLike, verbose: bool = False):
+def pip_install_wheel(wheel_file: PathLike, target_dir: PathLike, verbose: bool = False) -> None:
 	command = [
 			"pip",
 			"install",

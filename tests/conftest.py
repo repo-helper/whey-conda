@@ -1,5 +1,6 @@
 # stdlib
 import datetime
+from typing import Iterator
 
 # 3rd party
 import pytest
@@ -12,11 +13,11 @@ pytest_plugins = ("coincidence", )
 
 
 @pytest.fixture()
-def tar_regression(datadir, original_datadir, request) -> AdvancedFileRegressionFixture:
+def tar_regression(datadir, original_datadir, request) -> AdvancedFileRegressionFixture:  # noqa: MAN001
 	return TarFileRegressionFixture(datadir, original_datadir, request)
 
 
 @pytest.fixture()
-def fixed_datetime():
+def fixed_datetime() -> Iterator:
 	with with_fixed_datetime(datetime.datetime.fromtimestamp(1602552000.0)):
 		yield

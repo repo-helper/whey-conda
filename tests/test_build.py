@@ -1,6 +1,6 @@
 # stdlib
 import tempfile
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 # 3rd party
 import pytest
@@ -124,7 +124,7 @@ def test_build_success(
 	advanced_data_regression.check(data)
 
 
-def check_built_wheel(filename: PathPlus, tar_regression: TarFileRegressionFixture):
+def check_built_wheel(filename: PathPlus, tar_regression: TarFileRegressionFixture) -> List[str]:
 	assert filename.is_file()
 
 	with TarFile.open(filename) as zip_file:
