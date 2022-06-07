@@ -77,7 +77,6 @@ class CondaBuilder(WheelBuilder):
 	:param verbose: Enable verbose output.
 
 	.. autosummary-widths:: 1/2
-		:html: 45/100
 	"""
 
 	def __init__(

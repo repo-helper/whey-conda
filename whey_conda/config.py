@@ -41,7 +41,6 @@ class WheyCondaParser(AbstractConfigParser):
 	Parser for the ``[tool.whey-conda]`` table from ``pyproject.toml``.
 
 	.. autosummary-widths:: 7/16
-		:html: 4/10
 	"""
 
 	defaults = {"conda-description": "%s", "conda-extras": "none", "conda-channels": ("conda-forge", )}
