@@ -33,7 +33,7 @@ from typing import Dict, List, Union
 from dom_toml.parser import TOML_TYPES, AbstractConfigParser, BadConfigError, construct_path
 from typing_extensions import Literal
 
-__all__ = ["WheyCondaParser"]
+__all__ = ("WheyCondaParser", )
 
 
 class WheyCondaParser(AbstractConfigParser):
@@ -124,7 +124,7 @@ class WheyCondaParser(AbstractConfigParser):
 
 		extras = config["conda-extras"]
 
-		path_elements = [*self.table_name, "conda-extras"]
+		path_elements = [*self.table_name, "conda-extras"]  # pylint: disable=use-tuple-over-list
 
 		if isinstance(extras, str):
 			extras_lower = extras.lower()

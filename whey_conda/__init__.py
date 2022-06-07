@@ -56,7 +56,7 @@ from whey.builder import WheelBuilder
 # this package
 from whey_conda.config import WheyCondaParser
 
-__all__ = ["CondaBuilder"]
+__all__ = ("CondaBuilder", )
 
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2020-2021 Dominic Davis-Foster"
@@ -187,6 +187,7 @@ class CondaBuilder(WheelBuilder):
 
 		about = {}
 
+		# pylint: disable=loop-invariant-statement
 		for category, url in self.config["urls"].items():
 			if category.lower() in {"homepage", "home page"}:
 				about["home"] = url
@@ -212,6 +213,7 @@ class CondaBuilder(WheelBuilder):
 		author = []
 		maintainer = []
 
+		# pylint: disable=use-list-comprehension
 		for entry in self.config["authors"]:
 			if entry["name"]:
 				author.append(entry["name"])
@@ -224,6 +226,8 @@ class CondaBuilder(WheelBuilder):
 			about["extra"] = {"maintainers": maintainer}
 		elif author:
 			about["extra"] = {"maintainers": author}
+
+		# pylint: enable=loop-invariant-statement,use-list-comprehension
 
 		about_json_file = self.info_dir / "about.json"
 		about_json_file.dump_json(about, indent=2)
@@ -275,7 +279,7 @@ class CondaBuilder(WheelBuilder):
 						# Ensure the digest and size are updated for "conda" rather than "pip"
 						if ".dist-info/INSTALLER,sha256=" in line:
 							record_lines[idx] = get_record_entry(
-									dist_info_dir / "INSTALLER",
+									dist_info_dir / "INSTALLER",  # pylint: disable=loop-invariant-statement
 									relative_to=wheel_contents_dir,
 									)
 						elif ".dist-info/direct_url.json,sha256=" in line:
@@ -286,7 +290,7 @@ class CondaBuilder(WheelBuilder):
 					# Remove double blank line caused by removal of entries
 					file.write_clean('\n'.join(record_lines).replace("\n\n", '\n'))
 
-				elif file.name in {"REQUESTED", "direct_url.json"}:
+				elif file.name in {"REQUESTED", "direct_url.json"}:  # pylint: disable=loop-invariant-statement
 					continue
 
 				if file.is_file():
@@ -385,6 +389,7 @@ class CondaBuilder(WheelBuilder):
 
 
 def pip_install_wheel(wheel_file: PathLike, target_dir: PathLike, verbose: bool = False) -> None:
+	# pylint: disable=use-tuple-over-list
 	command = [
 			"pip",
 			"install",
@@ -397,6 +402,7 @@ def pip_install_wheel(wheel_file: PathLike, target_dir: PathLike, verbose: bool 
 			"--no-warn-conflicts",
 			"--disable-pip-version-check",
 			]
+	# pylint: enable=use-tuple-over-list
 
 	process = Popen(command, stdout=PIPE)
 	(output, err) = process.communicate()
