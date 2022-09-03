@@ -58,8 +58,8 @@ whey-conda
 	:target: https://github.com/repo-helper/whey-conda/actions?query=workflow%3A%22mypy%22
 	:alt: mypy status
 
-.. |requires| image:: https://dependency-dash.herokuapp.com/github/repo-helper/whey-conda/badge.svg
-	:target: https://dependency-dash.herokuapp.com/github/repo-helper/whey-conda/
+.. |requires| image:: https://dependency-dash.repo-helper.uk/github/repo-helper/whey-conda/badge.svg
+	:target: https://dependency-dash.repo-helper.uk/github/repo-helper/whey-conda/
 	:alt: Requirements Status
 
 .. |coveralls| image:: https://img.shields.io/coveralls/github/repo-helper/whey-conda/master?logo=coveralls
