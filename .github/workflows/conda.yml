@@ -12,7 +12,7 @@ permissions:
 jobs:
   tests:
     name: "Conda"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     defaults:
       run:
         shell: bash -l {0}
@@ -21,25 +21,25 @@ jobs:
         fail-fast: False
         matrix:
           config:
-            - {repo: "sphinx-toolbox/default_values", name: "default_values", version: "0.5.1"}
+            - {repo: "sphinx-toolbox/default_values", name: "default_values", version: "0.5.2"}
             - {repo: "sphinx-toolbox/dict2css", name: "dict2css", version: "0.3.0"}
-            - {repo: "sphinx-toolbox/extras_require", name: "extras_require", version: "0.4.3"}
-            - {repo: "sphinx-toolbox/seed_intersphinx_mapping", name: "seed_intersphinx_mapping", version: "1.0.1"}
+            - {repo: "sphinx-toolbox/extras_require", name: "extras_require", version: "0.5.0"}
+            - {repo: "sphinx-toolbox/seed_intersphinx_mapping", name: "seed_intersphinx_mapping", version: "1.2.1"}
             - {repo: "sphinx-toolbox/sphinx-debuginfo", name: "sphinx-debuginfo", version: "0.2.2"}
             - {repo: "sphinx-toolbox/sphinx-highlights", name: "sphinx-highlights", version: "0.5.1"}
-            - {repo: "sphinx-toolbox/sphinx-toolbox", name: "sphinx-toolbox", version: "3.0.0"}
-            - {repo: "sphinx-toolbox/toctree_plus", name: "toctree_plus", version: "0.6.0"}
-            - {repo: "repo-helper/mkrecipe", name: "mkrecipe", version: "0.5.0"}
+            - {repo: "sphinx-toolbox/sphinx-toolbox", name: "sphinx-toolbox", version: "3.4.0"}
+            - {repo: "sphinx-toolbox/toctree_plus", name: "toctree_plus", version: "0.6.1"}
+            - {repo: "repo-helper/mkrecipe", name: "mkrecipe", version: "0.6.0"}
             - {repo: "repo-helper/whey", name: "whey", version: "0.0.23"}
             - {repo: "domdfcoding/consolekit", name: "consolekit", version: "1.4.1"}
             - {repo: "domdfcoding/mathematical", name: "mathematical", version: "0.5.1"}
 
     steps:
       - name: Checkout 🛎️
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v3"
 
       - name: Setup Python 🐍
-        uses: "actions/setup-python@v2"
+        uses: "actions/setup-python@v4"
         with:
           python-version: "3.8"
 
@@ -47,7 +47,9 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: env
-          conda-build-version: 3.21.0
+          conda-build-version: 3.23.3
+          python-version: "3.8"
+          miniforge-variant: Mambaforge
 
       - name: Install dependencies 🔧
         run: |
