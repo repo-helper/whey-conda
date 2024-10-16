@@ -101,7 +101,7 @@ whey-conda
 .. |language| image:: https://img.shields.io/github/languages/top/repo-helper/whey-conda
 	:alt: GitHub top language
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/repo-helper/whey-conda/v0.2.0
+.. |commits-since| image:: https://img.shields.io/github/commits-since/repo-helper/whey-conda/v0.3.0
 	:target: https://github.com/repo-helper/whey-conda/pulse
 	:alt: GitHub commits since tagged version
 
