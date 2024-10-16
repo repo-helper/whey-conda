@@ -6,7 +6,8 @@
   "depends": [
     "matplotlib>=3.0.0",
     "pytest<5.0.0",
-    "pytest-cov"
+    "pytest-cov",
+    "python"
   ],
   "arch": null,
   "noarch": "python",

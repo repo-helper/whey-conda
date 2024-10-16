@@ -167,7 +167,7 @@ class CondaBuilder(WheelBuilder):
 				"version": str(self.config["version"]),
 				"build": build_string,
 				"build_number": build_number,
-				"depends": list(map(str, self.get_runtime_requirements())),
+				"depends": [*map(str, self.get_runtime_requirements()), "python"],
 				"arch": None,
 				"noarch": "python",
 				"platform": None,

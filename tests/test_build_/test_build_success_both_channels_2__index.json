@@ -5,7 +5,8 @@
   "build_number": 1,
   "depends": [
     "domdf-python-tools",
-    "typing-extensions>=3.10.0.0"
+    "typing-extensions>=3.10.0.0",
+    "python"
   ],
   "arch": null,
   "noarch": "python",

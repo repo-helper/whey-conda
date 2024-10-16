@@ -3,7 +3,9 @@
   "version": "2020.0.0",
   "build": "py_1",
   "build_number": 1,
-  "depends": [],
+  "depends": [
+    "python"
+  ],
   "arch": null,
   "noarch": "python",
   "platform": null,
