@@ -67,7 +67,7 @@ jobs:
         run: |
           git clone https://github.com/${{ matrix.config.repo }} ${{ matrix.config.name }}
           git -C $(pwd)/${{ matrix.config.name }} checkout v${{ matrix.config.version }}
-          python -m whey --builder whey_conda --out-dir ${{ matrix.config.name }}/conda-bld/noarch
+          python -m whey --builder whey_conda --out-dir ${{ matrix.config.name }}/conda-bld/noarch ${{ matrix.config.name }}
 
           $CONDA/bin/conda index ./${{ matrix.config.name }}/conda-bld || exit 1
           $CONDA/bin/conda install -c file://$(pwd)/${{ matrix.config.name }}/conda-bld ${{ matrix.config.name }}=${{ matrix.config.version }} -y || exit 1
