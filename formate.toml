@@ -39,6 +39,7 @@ known_third_party = [
     "handy_archives",
     "importlib_metadata",
     "mkrecipe",
+    "packaging",
     "pyproject_parser",
     "pytest",
     "pytest_cov",
