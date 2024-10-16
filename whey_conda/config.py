@@ -5,7 +5,7 @@
 Configuration for ``whey-conda``.
 """
 #
-#  Copyright © 2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
+#  Copyright © 2021-2024 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,7 @@ from typing import Dict, List, Union
 
 # 3rd party
 from dom_toml.parser import TOML_TYPES, AbstractConfigParser, BadConfigError, construct_path
+from packaging.version import Version
 from typing_extensions import Literal
 
 __all__ = ("WheyCondaParser", )
@@ -40,10 +41,16 @@ class WheyCondaParser(AbstractConfigParser):
 	"""
 	Parser for the ``[tool.whey-conda]`` table from ``pyproject.toml``.
 
-	.. autosummary-widths:: 7/16
+	.. autosummary-widths:: 6/16
 	"""
 
-	defaults = {"conda-description": "%s", "conda-extras": "none", "conda-channels": ("conda-forge", )}
+	defaults = {
+			"conda-description": "%s",
+			"conda-extras": "none",
+			"conda-channels": ("conda-forge", ),
+			"min-python-version": None,
+			"max-python-version": None
+			}
 
 	table_name = ("tool", "whey-conda")
 
@@ -124,7 +131,7 @@ class WheyCondaParser(AbstractConfigParser):
 
 		extras = config["conda-extras"]
 
-		path_elements = [*self.table_name, "conda-extras"]  # pylint: disable=use-tuple-over-list
+		path_elements = (*self.table_name, "conda-extras")
 
 		if isinstance(extras, str):
 			extras_lower = extras.lower()
@@ -143,6 +150,36 @@ class WheyCondaParser(AbstractConfigParser):
 
 		return extras
 
+	def parse_min_python_version(self, config: Dict[str, TOML_TYPES]) -> int:
+		"""
+		Parse the ``min-python-version`` key, giving the minimum Python 3.x version to consider requirements for.
+
+		:param config: The unparsed TOML config for the ``[tool.whey-conda]`` table.
+
+		:rtype:
+
+		.. versionadded:: 0.3.0
+		"""
+
+		v = Version(str(config["min-python-version"]))
+		assert v.major == 3
+		return v.minor
+
+	def parse_max_python_version(self, config: Dict[str, TOML_TYPES]) -> int:
+		"""
+		Parse the ``max-python-version`` key, giving the maximum Python 3.x version to consider requirements for.
+
+		:param config: The unparsed TOML config for the ``[tool.whey-conda]`` table.
+
+		:rtype:
+
+		.. versionadded:: 0.3.0
+		"""
+
+		v = Version(str(config["max-python-version"]))
+		assert v.major == 3
+		return v.minor
+
 	@property
 	def keys(self) -> List[str]:
 		"""
@@ -153,6 +190,8 @@ class WheyCondaParser(AbstractConfigParser):
 				"conda-description",
 				"conda-channels",
 				"conda-extras",
+				"min-python-version",
+				"max-python-version",
 				]
 
 	def parse(

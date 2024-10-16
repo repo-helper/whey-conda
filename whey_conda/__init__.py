@@ -46,6 +46,7 @@ from consolekit.utils import abort
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.typing import PathLike
 from domdf_python_tools.words import word_join
+from mkrecipe import filter_reqs_by_py_version, filter_reqs_with_markers
 from mkrecipe.config import MkrecipeParser
 from pyproject_parser.classes import _NormalisedName
 from shippinglabel.checksum import get_record_entry
@@ -327,7 +328,7 @@ class CondaBuilder(WheelBuilder):
 		Returns a list of the project's runtime requirements.
 		"""
 
-		extras: List[Union[ComparableRequirement, str]] = []
+		extras: List[Union[str, ComparableRequirement]] = []
 
 		if self.config["conda-extras"] == "all":
 			extras.extend(chain.from_iterable(self.config["optional-dependencies"].values()))
@@ -341,14 +342,20 @@ class CondaBuilder(WheelBuilder):
 
 		# TODO: handle extras from the dependencies. Lookup the requirements in the wheel metadata.
 		#  Perhaps wait until exposed in PyPI API
-		all_requirements = prepare_requirements(chain(self.config["dependencies"], extra_requirements))
+		all_requirements: List[ComparableRequirement] = list(
+				filter_reqs_with_markers(self.config, chain(self.config["dependencies"], extra_requirements))
+				)
+		all_requirements = filter_reqs_by_py_version(self.config, all_requirements)
 
 		self._echo_if_v(
 				f"Checking dependencies against the following channels: "
 				f"{word_join(self.config['conda-channels'], use_repr=True)}"
 				)
 
-		all_requirements = validate_requirements(all_requirements, self.config["conda-channels"])
+		all_requirements = validate_requirements(
+				prepare_requirements(all_requirements),
+				self.config["conda-channels"],
+				)
 
 		requirements_entries = [req for req in all_requirements if req and req != "numpy"]
 
