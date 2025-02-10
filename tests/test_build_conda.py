@@ -3,6 +3,7 @@ import sys
 
 # 3rd party
 import dom_toml
+import dulwich
 import pytest
 import southwark
 from apeye import URL
@@ -49,6 +50,7 @@ def test_build(username: str, repository: str, tmp_pathplus: PathPlus, monkeypat
 	monkeypatch.setattr(StackedConfig, "default_backends", lambda *args: [])
 	email = b"repo-helper[bot] <74742576+repo-helper[bot]@users.noreply.github.com>"
 	monkeypatch.setattr(southwark.repo, "get_user_identity", lambda *args: email)
+	monkeypatch.setattr(dulwich.repo, "get_user_identity", lambda *args: email)
 
 	target_dir = tmp_pathplus / f"{username}_{repository}"
 
