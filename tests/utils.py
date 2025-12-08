@@ -33,8 +33,8 @@ class TarFile(tarfile.TarFile):
 		def __enter__(self: _TF) -> _TF:
 			return super().__enter__()
 
-		@classmethod  # noqa: A001  # pylint: disable=redefined-builtin
-		def open(
+		@classmethod
+		def open(  # noqa: A001  # pylint: disable=redefined-builtin
 				cls: Type[_TF],
 				*args,
 				**kwargs,
