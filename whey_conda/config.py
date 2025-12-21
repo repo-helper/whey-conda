@@ -127,6 +127,7 @@ class WheyCondaParser(AbstractConfigParser):
 			[tool.whey-conda]
 			conda-extras = "all"
 
+		:param config:
 		"""  # noqa: D400
 
 		extras = config["conda-extras"]

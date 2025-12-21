@@ -71,11 +71,13 @@ class CondaBuilder(WheelBuilder):
 	Builds Conda packages using metadata read from ``pyproject.toml``.
 
 	:param project_dir: The project to build the distribution for.
+	:param config:
 	:param build_dir: The (temporary) build directory.
 	:default build_dir: :file:`{<project_dir>}/build/wheel`
 	:param out_dir: The output directory.
 	:default out_dir: :file:`{<project_dir>}/dist`
 	:param verbose: Enable verbose output.
+	:param colour: Enable coloured terminal output.
 
 	.. autosummary-widths:: 1/2
 	"""
