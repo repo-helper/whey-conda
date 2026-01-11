@@ -17,9 +17,10 @@ from whey_conda import WheyCondaParser
 				pytest.param('[tool.whey-conda]\nconda-extras = "all"', id="extras_all"),
 				pytest.param('[tool.whey-conda]\nconda-extras = "none"', id="extras_none"),
 				pytest.param(
-						'[tool.whey-conda]\nconda-channels = ["domdfcoding", "conda-forge"]', id="conda_channels"
+						'[tool.whey-conda]\nconda-channels = ["domdfcoding", "conda-forge"]',
+						id="conda_channels",
 						),
-				]
+				],
 		)
 def test_whey_conda_parser_valid_config(
 		toml_config: str,
@@ -32,9 +33,10 @@ def test_whey_conda_parser_valid_config(
 
 
 @pytest.mark.parametrize(
-		"toml_config", [
+		"toml_config",
+		[
 				pytest.param('[tool.whey-conda]\nconda-extras = "cli"', id="extras_cli"),
-				]
+				],
 		)
 def test_whey_conda_parser_invalid_extras(toml_config: str):
 

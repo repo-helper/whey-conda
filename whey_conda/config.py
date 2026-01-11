@@ -49,7 +49,7 @@ class WheyCondaParser(AbstractConfigParser):
 			"conda-extras": "none",
 			"conda-channels": ("conda-forge", ),
 			"min-python-version": None,
-			"max-python-version": None
+			"max-python-version": None,
 			}
 
 	table_name = ("tool", "whey-conda")
@@ -143,7 +143,7 @@ class WheyCondaParser(AbstractConfigParser):
 			else:
 				raise BadConfigError(
 						f"Invalid value for [{construct_path(path_elements)}]: "
-						"Expected 'all', 'none' or a list of strings."
+						"Expected 'all', 'none' or a list of strings.",
 						)
 
 		for idx, impl in enumerate(extras):

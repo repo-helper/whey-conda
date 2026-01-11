@@ -174,7 +174,7 @@ class CondaBuilder(WheelBuilder):
 				"noarch": "python",
 				"platform": None,
 				"subdir": "noarch",
-				"timestamp": int(datetime.datetime.now().timestamp() * 1000)
+				"timestamp": int(datetime.datetime.now().timestamp() * 1000),
 				}
 
 		index_json_file = self.info_dir / "index.json"
@@ -345,13 +345,13 @@ class CondaBuilder(WheelBuilder):
 		# TODO: handle extras from the dependencies. Lookup the requirements in the wheel metadata.
 		#  Perhaps wait until exposed in PyPI API
 		all_requirements: List[ComparableRequirement] = list(
-				filter_reqs_with_markers(self.config, chain(self.config["dependencies"], extra_requirements))
+				filter_reqs_with_markers(self.config, chain(self.config["dependencies"], extra_requirements)),
 				)
 		all_requirements = filter_reqs_by_py_version(self.config, all_requirements)
 
 		self._echo_if_v(
 				f"Checking dependencies against the following channels: "
-				f"{word_join(self.config['conda-channels'], use_repr=True)}"
+				f"{word_join(self.config['conda-channels'], use_repr=True)}",
 				)
 
 		all_requirements = validate_requirements(
@@ -429,7 +429,7 @@ def pip_install_wheel(wheel_file: PathLike, target_dir: PathLike, verbose: bool 
 					Command '{' '.join(command)}' returned non-zero exit code {exit_code}:
 
 					{indent(err.decode("UTF-8"), '    ')}
-					"""
+					""",
 				)
 
 		raise abort(message.rstrip() + '\n')

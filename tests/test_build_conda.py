@@ -43,7 +43,7 @@ GITHUB_COM = URL("https://github.com")
 				("repo-helper", "whey"),
 				("domdfcoding", "consolekit"),
 				("domdfcoding", "mathematical"),
-				]
+				],
 		)
 def test_build(username: str, repository: str, tmp_pathplus: PathPlus, monkeypatch):
 	# Monkeypatch dulwich so it doesn't try to use the global config.

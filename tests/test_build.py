@@ -56,14 +56,16 @@ from whey_conda import CondaBuilder
 						),
 				pytest.param(
 						f'{MINIMAL_CONFIG}\nrequires-python = ">=2.7,!=3.0.*,!=3.2.*"',
-						id="requires-python_complex"
+						id="requires-python_complex",
 						),
 				pytest.param(KEYWORDS, id="keywords"),
 				pytest.param(AUTHORS, id="authors"),
 				pytest.param(MAINTAINERS, id="maintainers"),
 				pytest.param(CLASSIFIERS, id="classifiers"),
-				pytest.
-				param(f"{DEPENDENCIES}\n[tool.whey-conda]\nconda-channels = ['conda-forge']\n", id="dependencies"),
+				pytest.param(
+						f"{DEPENDENCIES}\n[tool.whey-conda]\nconda-channels = ['conda-forge']\n",
+						id="dependencies",
+						),
 				pytest.param(OPTIONAL_DEPENDENCIES, id="optional-dependencies"),
 				pytest.param(CONDA_DESCRIPTION, id="conda-description"),
 				pytest.param(CONDA_EXTRAS, id="conda-extras"),
@@ -78,7 +80,7 @@ from whey_conda import CondaBuilder
 				pytest.param(URLS, id="urls"),
 				pytest.param(ENTRY_POINTS, id="entry_points"),
 				pytest.param(UNICODE, id="unicode"),
-				]
+				],
 		)
 @pytest.mark.usefixtures("fixed_datetime")
 def test_build_success(
@@ -164,7 +166,7 @@ def check_built_wheel(filename: PathPlus, tar_regression: TarFileRegressionFixtu
 						f"{LONG_REQUIREMENTS}\n[tool.whey-conda]\nconda-channels = ['conda-forge']\n",
 						id="LONG_REQUIREMENTS",
 						),
-				]
+				],
 		)
 def test_build_complete(
 		config: str,
@@ -348,7 +350,7 @@ def test_build_empty_dir(tmp_pathplus: PathPlus):
 						f"{LONG_REQUIREMENTS}\n[tool.whey-conda]\nconda-channels = ['conda-forge']\n",
 						id="LONG_REQUIREMENTS",
 						),
-				]
+				],
 		)
 def test_build_conda_from_sdist(
 		config: str,
@@ -363,7 +365,10 @@ def test_build_conda_from_sdist(
 	(tmp_pathplus / "README.rst").write_clean("Spam Spam Spam Spam")
 	(tmp_pathplus / "LICENSE").write_clean("This is the license")
 	(tmp_pathplus / "requirements.txt").write_lines([
-			"httpx", "gidgethub[httpx]>4.0.0", "django>2.1; os_name != 'nt'", "django>2.0; os_name == 'nt'"
+			"httpx",
+			"gidgethub[httpx]>4.0.0",
+			"django>2.1; os_name != 'nt'",
+			"django>2.0; os_name == 'nt'",
 			])
 
 	# Build the sdist
