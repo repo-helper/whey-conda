@@ -113,7 +113,7 @@ whey-conda
 	:alt: Maintenance
 
 .. |pypi-downloads| image:: https://img.shields.io/pypi/dm/whey-conda
-	:target: https://pypi.org/project/whey-conda/
+	:target: https://pypistats.org/packages/whey-conda
 	:alt: PyPI - Downloads
 
 .. end shields
