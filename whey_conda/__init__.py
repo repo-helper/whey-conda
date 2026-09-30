@@ -53,6 +53,7 @@ from shippinglabel.checksum import get_record_entry
 from shippinglabel.requirements import ComparableRequirement
 from shippinglabel_conda import make_conda_description, prepare_requirements, validate_requirements
 from whey.builder import WheelBuilder
+from whey.config.whey import license_lookup
 
 # this package
 from whey_conda.config import WheyCondaParser
@@ -175,6 +176,7 @@ class CondaBuilder(WheelBuilder):
 				"platform": None,
 				"subdir": "noarch",
 				"timestamp": int(datetime.datetime.now().timestamp() * 1000),
+				"license": license_lookup.get(self.config["license-key"], self.config["license-key"]),
 				}
 
 		index_json_file = self.info_dir / "index.json"
@@ -231,6 +233,8 @@ class CondaBuilder(WheelBuilder):
 			about["extra"] = {"maintainers": author}
 
 		# pylint: enable=loop-invariant-statement,use-list-comprehension
+		# about["channels"] = self.config["conda-channels"]
+		about["license"] = license_lookup.get(self.config["license-key"], self.config["license-key"])
 
 		about_json_file = self.info_dir / "about.json"
 		about_json_file.dump_json(about, indent=2)
